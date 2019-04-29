@@ -260,4 +260,9 @@ module.exports = {
     unidriver: true,
     testkitPath: '../src/ErrorIndicator/ErrorIndicator.uni.driver',
   },
+
+  LinearProgressBarNew: {
+    unidriver: true,
+    testkitPath: '../src/LinearProgressBarNew/LinearProgressBarNew.uni.driver',
+  },
 };
