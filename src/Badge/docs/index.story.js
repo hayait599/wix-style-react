@@ -5,9 +5,6 @@ import { default as Badge, SIZE, SKIN, TYPE } from '..';
 import { storySettings } from './storySettings';
 import Facebook from 'wix-ui-icons-common/Facebook';
 import ChevronDown from 'wix-ui-icons-common/ChevronDown';
-import CodeExample from 'wix-storybook-utils/CodeExample';
-
-import ExampleBadges from './ExampleBadges';
 import ExampleBadgesRaw from '!raw-loader!./ExampleBadges';
 import {
   api,
@@ -19,10 +16,24 @@ import {
   tab,
   tabs,
   testkit,
+  title,
 } from 'wix-storybook-utils/dist/src/Sections';
 import allComponents from '../../../stories/utils/allComponents';
+import styles from './ExampleBadges.scss';
 
-import LiveCodeExample from '../../../stories/utils/LiveCodeExample';
+const examplesComponents = {
+  SIZE,
+  SKIN,
+  TYPE,
+  styles,
+};
+Object.assign(examplesComponents, allComponents);
+
+const code = config =>
+  baseCode({
+    components: examplesComponents,
+    ...config,
+  });
 
 export default {
   category: storySettings.category,
@@ -60,6 +71,27 @@ export default {
           importExample("import Badge from 'wix-style-react/Badge';';"),
 
           divider(),
+
+          title('Examples'),
+
+          ...[
+            {
+              title: 'With icon',
+              description:
+                'Badge can contain icon as a prefix/suffix Icon size should match badge size. For a medium sized badge use normal icons. For a small badge use small icons which end with the prefix Small',
+              source: `
+              <Layout cols={2} gap={0} justifyItems="center">
+                  <Badge size="small" prefixIcon={<ChevronDownSmall/>}>small badge</Badge>
+                  <Badge size="medium" prefixIcon={<ChevronDown/>}>medium badge</Badge>
+              </Layout>
+          `,
+            },
+            {
+              title: 'Variations',
+              source: ExampleBadgesRaw,
+              autoRender: false,
+            },
+          ].map(code),
         ],
       }),
 
@@ -70,25 +102,4 @@ export default {
       ].map(tab),
     ]),
   ],
-
-  examples: (
-    <div>
-      <div style={{ width: '70%' }}>
-        <div style={{ fontSize: '22px' }}>With icon</div>
-        <LiveCodeExample
-          compact
-          title="Badge can contain icon as a prefix/suffix.\r\n Icon size should match badge size. For a medium sized badge use normal icons. For a small badge use small icons which end with the prefix Small"
-          initialCode={`
-              <Layout cols={2} gap={0} justifyItems="center">
-                  <Badge size="small" prefixIcon={<ChevronDown/>}>small badge</Badge>
-                  <Badge size="medium" prefixIcon={<ChevronDown/>}>medium badge</Badge>
-              </Layout>
-          `}
-        />
-      </div>
-      <CodeExample title="Variations" code={ExampleBadgesRaw}>
-        <ExampleBadges />
-      </CodeExample>
-    </div>
-  ),
 };
