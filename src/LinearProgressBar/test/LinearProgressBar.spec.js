@@ -22,9 +22,9 @@ describe('LinearProgressBar', () => {
         <LinearProgressBar {...defaultProps} {...errorProps} />,
       );
       expect(driver.isTooltipShown()).toBe(false);
-      driver.getTooltip().mouseEnter();
+      driver.hoverErrorIcon();
       expect(driver.isTooltipShown()).toBe(true);
-      expect(driver.getTooltip().getContentElement().innerHTML).toContain(
+      expect(driver.getTooltipErrorMessage()).toContain(
         errorProps.errorMessage,
       );
     });

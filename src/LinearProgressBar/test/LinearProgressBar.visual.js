@@ -114,7 +114,7 @@ const interactiveTests = [
         },
         componentDidMount: () => {
           const driver = createLinearProgressBarDriver(dataHook);
-          driver.getTooltip().mouseEnter();
+          driver.hoverErrorIcon();
         },
       },
     ],
