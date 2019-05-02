@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { createDriverFactory } from 'wix-ui-test-utils/driver-factory';
-import linearProgressBarPrivateDriverFactory from '../LinearProgressBar.driver';
+import linearProgressBarDriverFactory from '../LinearProgressBar.driver';
 import LinearProgressBar from '../LinearProgressBar';
 
 describe('LinearProgressBar', () => {
-  const createDriver = createDriverFactory(
-    linearProgressBarPrivateDriverFactory,
-  );
+  const createDriver = createDriverFactory(linearProgressBarDriverFactory);
 
   const defaultProps = {
     value: 40,
