@@ -92,14 +92,7 @@ class AddItem extends Component {
   };
 
   renderContent = () => {
-    const {
-      tooltipContent,
-      theme,
-      alignItems,
-      size,
-      disabled,
-      dataHook,
-    } = this.props;
+    const { tooltipContent, theme, alignItems, size, disabled } = this.props;
     const box = classnames(styles.box, styles[alignItems], {
       [styles.row]: size === 'tiny',
       [styles[theme]]: theme === 'image',
@@ -117,11 +110,7 @@ class AddItem extends Component {
     };
 
     return tooltipProps.content && !disabled ? (
-      <Tooltip
-        {...tooltipProps}
-        upgrade
-        dataHook={`additem-tooltip-${dataHook}`}
-      >
+      <Tooltip {...tooltipProps} upgrade dataHook="additem-tooltip">
         {container}
       </Tooltip>
     ) : (
