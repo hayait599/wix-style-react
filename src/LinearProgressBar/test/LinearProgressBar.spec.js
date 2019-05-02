@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { createDriverFactory } from 'wix-ui-test-utils/driver-factory';
-import linearProgressBarDriverFactory from '../LinearProgressBar.driver';
+import linearProgressBarPrivateDriverFactory from '../LinearProgressBar.driver';
 import LinearProgressBar from '../LinearProgressBar';
 
 describe('LinearProgressBar', () => {
-  const createDriver = createDriverFactory(linearProgressBarDriverFactory);
+  const createDriver = createDriverFactory(
+    linearProgressBarPrivateDriverFactory,
+  );
 
   const defaultProps = {
     value: 40,
@@ -17,16 +19,15 @@ describe('LinearProgressBar', () => {
       showProgressIndication: true,
     };
 
-    it('should display tooltip text only on hover', () => {
+    it('should display tooltip text only on hover', async () => {
       const driver = createDriver(
         <LinearProgressBar {...defaultProps} {...errorProps} />,
       );
       expect(driver.isTooltipShown()).toBe(false);
-      driver.hoverErrorIcon();
+      const toolTipErrorMsg = await driver.getTooltipErrorMessage();
+
       expect(driver.isTooltipShown()).toBe(true);
-      expect(driver.getTooltipErrorMessage()).toContain(
-        errorProps.errorMessage,
-      );
+      expect(toolTipErrorMsg).toContain(errorProps.errorMessage);
     });
 
     it('should display error icon', () => {

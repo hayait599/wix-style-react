@@ -25,8 +25,10 @@ const linearProgressBarDriverFactory = ({ element, eventTrigger, wrapper }) => {
     getTooltip,
     isErrorIconShown: () => !!errorIcon(),
     isSuccessIconShown: () => !!successIcon(),
-    hoverErrorIcon: () => getTooltip().mouseEnter(),
-    getTooltipErrorMessage: () => getTooltip().getContentElement().innerHTML,
+    getTooltipErrorMessage: async () => {
+      await getTooltip().mouseEnter();
+      return getTooltip().getContentElement().textContent;
+    },
   };
 };
 
