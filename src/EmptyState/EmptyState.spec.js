@@ -1,12 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import { createDriverFactory } from 'wix-ui-test-utils/driver-factory';
-import { isEnzymeTestkitExists } from 'wix-ui-test-utils/enzyme';
-import { isTestkitExists } from 'wix-ui-test-utils/vanilla';
 import EmptyState from './EmptyState';
 import emptyStateDriverFactory from './EmptyState.driver';
-import { emptyStateTestkitFactory } from '../../testkit';
-import { emptyStateTestkitFactory as enzymeEmptyStateTestkitFactory } from '../../testkit/enzyme';
 
 describe('EmptyState', () => {
   const createDriver = createDriverFactory(emptyStateDriverFactory);
@@ -55,28 +50,5 @@ describe('EmptyState', () => {
     );
 
     expect(driver.childrenContentExists()).toEqual(true);
-  });
-
-  describe('testkit', () => {
-    it('should exist', () => {
-      expect(
-        isTestkitExists(
-          <EmptyState {...defaultProps} />,
-          emptyStateTestkitFactory,
-        ),
-      ).toBe(true);
-    });
-  });
-
-  describe('enzyme testkit', () => {
-    it('should exist', () => {
-      expect(
-        isEnzymeTestkitExists(
-          <EmptyState {...defaultProps} />,
-          enzymeEmptyStateTestkitFactory,
-          mount,
-        ),
-      ).toBe(true);
-    });
   });
 });
