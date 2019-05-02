@@ -25,7 +25,7 @@ InfoIcon.displayName = 'InfoIcon';
 
 InfoIcon.propTypes = {
   tooltipProps: PropTypes.shape(Tooltip.propTypes),
-  dataHook: PropTypes.string.isRequired,
+  dataHook: PropTypes.string,
   className: PropTypes.string,
 };
 
