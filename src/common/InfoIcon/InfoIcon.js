@@ -12,6 +12,7 @@ const InfoIcon = ({ dataHook, tooltipProps, className }) => (
     <Tooltip
       flip={false}
       enterDelay={0}
+      appendTo="window"
       {...tooltipProps}
       upgrade
       dataHook={dataHook}
