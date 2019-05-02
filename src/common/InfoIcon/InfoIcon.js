@@ -10,11 +10,10 @@ import styles from './InfoIcon.st.css';
 const InfoIcon = ({ dataHook, tooltipProps, className }) => (
   <div className={cx(styles.color, className)}>
     <Tooltip
-      upgrade
       flip={false}
-      appendTo="window"
       enterDelay={0}
       {...tooltipProps}
+      upgrade
       dataHook={dataHook}
     >
       <InfoCircle size="24px" />
