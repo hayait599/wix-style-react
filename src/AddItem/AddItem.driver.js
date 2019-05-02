@@ -1,11 +1,11 @@
 import textDriverFactory from '../Text/Text.driver';
 import { tooltipTestkitFactory } from 'wix-ui-core/dist/src/testkit';
 
-const addItemDriverFactory = ({ element, eventTrigger, dataHook }) => {
+const addItemDriverFactory = ({ element, eventTrigger }) => {
   const byHook = hook => element.querySelector(`[data-hook*="${hook}"]`);
   const tooltipTestkit = tooltipTestkitFactory({
     wrapper: element,
-    dataHook: `additem-tooltip-${dataHook}`,
+    dataHook: `additem-tooltip`,
   });
   const textDriver = () =>
     textDriverFactory({ element: byHook('additem-text') });
