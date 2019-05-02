@@ -13,6 +13,8 @@ import AddMedia from 'wix-ui-icons-common/system/AddMedia';
 
 import styles from './AddItem.scss';
 
+import style from './AddItem.st.css';
+
 const ICONS = {
   large: <AddItemLarge data-hook="additem-icon" />,
   medium: <AddItemMedium data-hook="additem-icon" />,
@@ -110,8 +112,13 @@ class AddItem extends Component {
     };
 
     return tooltipProps.content && !disabled ? (
-      <Tooltip {...tooltipProps} upgrade dataHook="additem-tooltip">
-        {container}
+      <Tooltip
+        {...tooltipProps}
+        appendTo="window"
+        upgrade
+        dataHook="additem-tooltip"
+      >
+        <div style={{ width: '100%' }}>{container}</div>
       </Tooltip>
     ) : (
       container
@@ -128,15 +135,9 @@ class AddItem extends Component {
       focusableOnBlur,
     } = this.props;
     const disable = disabled && theme !== 'image';
-    const image = theme === 'image';
-    const root = classnames(styles.root, {
-      [styles[theme]]: !image,
-      [styles.wrapped]: image,
-      [styles.disabled]: disable,
-    });
     return (
       <div
-        className={root}
+        {...style('root', { theme, disable }, this.props)}
         data-hook={dataHook}
         onClick={disabled ? null : onClick}
         onFocus={focusableOnFocus}
