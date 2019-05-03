@@ -7,8 +7,9 @@ import AddItemLarge from 'wix-ui-icons-common/system/AddItemLarge';
 import AddItemMedium from 'wix-ui-icons-common/system/AddItemMedium';
 import AddItemSmall from 'wix-ui-icons-common/system/AddItemSmall';
 import Add from '../new-icons/Add';
-import ActionText from './components/ActionText';
+
 import Tooltip from '../Tooltip';
+import Text from '../Text';
 import TooltipHOC from './components/TooltipHOC';
 import AddMedia from 'wix-ui-icons-common/system/AddMedia';
 
@@ -46,7 +47,7 @@ class AddItem extends Component {
     /** used for testing */
     dataHook: PropTypes.string,
 
-    /** Tooltip props, leave undefined for no tooltip */
+    /** @deprecated do not use this prop. Make sure to use tooltipcontent */
     tooltipProps: PropTypes.shape(Tooltip.propTypes),
 
     /** Content of the tooltip, leave undefined for no tooltip */
@@ -67,13 +68,26 @@ class AddItem extends Component {
 
   _renderText = () => {
     const { children, disabled, theme, size } = this.props;
+
+    const textSize = size === 'tiny' ? 'small' : 'medium';
+    const textColor = disabled ? '#CBD3DC' : '#3899EC';
+
     if (!children || theme === 'image') {
       return null;
     }
+
     return (
-      <ActionText disabled={disabled} size={size}>
-        {children}
-      </ActionText>
+      <div {...style('text', { size }, this.props)}>
+        <Text
+          weight="thin"
+          size={textSize}
+          style={{ color: textColor }}
+          dataHook="additem-text"
+          ellipsis
+        >
+          {children}
+        </Text>
+      </div>
     );
   };
 

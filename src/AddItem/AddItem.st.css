@@ -163,3 +163,32 @@
 .content:size(tiny) {
   flex-direction: row;
 }
+
+/** Text **/
+
+.text {
+  -st-states:size(enum(tiny, small, medium, large));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text:size(tiny) {
+  max-width: 100%;
+  flex-basis: auto;
+}
+
+.text:size(small) {
+  width: 100%;
+  padding-top: 6px;
+}
+
+.text:size(medium) {
+  width: 100%;
+  padding-top: 12px;
+}
+
+.text:size(large) {
+  width: 100%;
+  padding-top: 12px;
+}

@@ -3,9 +3,7 @@ import autoExampleDriver from 'wix-storybook-utils/AutoExampleDriver';
 
 import { createStoryUrl } from '../../test/utils/storybook-helpers';
 
-import { addItemTestkitFactory } from '../../testkit/protractor';
 import { storySettings } from './docs/storySettings';
-import { runFocusTests } from '../common/Focusable/FocusableTestsE2E';
 
 describe('AddItem', () => {
   const storyUrl = createStoryUrl({
@@ -47,16 +45,11 @@ describe('AddItem', () => {
     );
   });
 
-  describe(`'disable' prop`, () => {
+  describe(`'disabled' prop`, () => {
     ['dashes', 'filled', 'plain', 'image'].map(theme =>
       eyes.it(`should render with theme ${theme}`, async () => {
         await autoExampleDriver.setProps({ disabled: true, theme });
       }),
     );
-  });
-
-  describe('Generic', () => {
-    const driver = addItemTestkitFactory({ dataHook: storySettings.dataHook });
-    runFocusTests(driver, storyUrl);
   });
 });

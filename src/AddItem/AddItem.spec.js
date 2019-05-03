@@ -66,7 +66,7 @@ describe('AddItem', () => {
       });
     });
 
-    describe('Tooltip given tooltipContent', () => {
+    describe('Tooltip', () => {
       it('should appear [when] `theme` image prop is passed', async () => {
         const props = { tooltipContent: 'content', theme: 'image' };
         const { driver } = render(renderAddItem(props));
