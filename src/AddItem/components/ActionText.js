@@ -18,7 +18,7 @@ const ALIGN_TEXT = {
 
 class ActionText extends Component {
   static propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.node,
     disabled: PropTypes.bool,
     size: PropTypes.string,
   };

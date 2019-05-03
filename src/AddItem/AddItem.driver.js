@@ -9,7 +9,6 @@ const addItemDriverFactory = ({ element, eventTrigger }) => {
   });
   const textDriver = () =>
     textDriverFactory({ element: byHook('additem-text') });
-
   const deprecationMessage =
     'WARNING[AddItem]: Testkit method getTooltipDriver() is deprecated. Make sure to review AddItem Testkit for other available methods.';
 

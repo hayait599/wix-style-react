@@ -1,33 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 
-import { withFocusable, focusableStates } from '../common/Focusable';
+import { withFocusable } from 'wix-ui-core/dist/src/hocs/Focusable/FocusableHOC';
+
 import AddItemLarge from 'wix-ui-icons-common/system/AddItemLarge';
 import AddItemMedium from 'wix-ui-icons-common/system/AddItemMedium';
 import AddItemSmall from 'wix-ui-icons-common/system/AddItemSmall';
 import Add from '../new-icons/Add';
 import ActionText from './components/ActionText';
 import Tooltip from '../Tooltip';
+import TooltipHOC from './components/TooltipHOC';
 import AddMedia from 'wix-ui-icons-common/system/AddMedia';
-
-import styles from './AddItem.scss';
 
 import style from './AddItem.st.css';
 
 const ICONS = {
-  large: <AddItemLarge data-hook="additem-icon" />,
-  medium: <AddItemMedium data-hook="additem-icon" />,
-  small: <AddItemSmall data-hook="additem-icon" />,
-  tiny: (
-    <Add
-      data-hook="additem-icon"
-      width="26"
-      height="26"
-      style={{ flexShrink: 0 }}
-    />
-  ),
-  custom: <AddMedia data-hook="additem-icon" width="31" height="31" />,
+  large: <AddItemLarge />,
+  medium: <AddItemMedium />,
+  small: <AddItemSmall />,
+  tiny: <Add width="26" height="26" style={{ flexShrink: 0 }} />,
+  custom: <AddMedia width="31" height="31" />,
 };
 
 class AddItem extends Component {
@@ -59,12 +51,6 @@ class AddItem extends Component {
 
     /** Content of the tooltip, leave undefined for no tooltip */
     tooltipContent: PropTypes.string,
-
-    /** Focusable proptype */
-    focusableOnFocus: PropTypes.func,
-
-    /** Focusable proptype */
-    focusableOnBlur: PropTypes.func,
   };
 
   static defaultProps = {
@@ -73,55 +59,37 @@ class AddItem extends Component {
     alignItems: 'center',
   };
 
-  renderIcon = () => {
+  _renderIcon = () => {
     const { size, theme } = this.props;
     const image = theme === 'image';
     return ICONS[image ? 'custom' : size];
   };
 
-  renderText = () => {
+  _renderText = () => {
     const { children, disabled, theme, size } = this.props;
     if (!children || theme === 'image') {
       return null;
     }
-    return typeof children === 'string' ? (
+    return (
       <ActionText disabled={disabled} size={size}>
         {children}
       </ActionText>
-    ) : (
-      children
     );
   };
 
-  renderContent = () => {
-    const { tooltipContent, theme, alignItems, size, disabled } = this.props;
-    const box = classnames(styles.box, styles[alignItems], {
-      [styles.row]: size === 'tiny',
-      [styles[theme]]: theme === 'image',
-    });
+  _renderContent = () => {
+    const { theme, alignItems, size } = this.props;
+
     const container = (
-      <div className={box}>
-        {this.renderIcon()}
-        {this.renderText()}
+      <div {...style('content', { theme, size, alignItems })}>
+        {this._renderIcon()}
+        {this._renderText()}
       </div>
     );
-    const tooltipProps = {
-      placement: 'top',
-      content: tooltipContent,
-      ...this.props.tooltipProps,
-    };
-
-    return tooltipProps.content && !disabled ? (
-      <Tooltip
-        {...tooltipProps}
-        appendTo="window"
-        upgrade
-        dataHook="additem-tooltip"
-      >
-        <div style={{ width: '100%' }}>{container}</div>
-      </Tooltip>
-    ) : (
-      container
+    return (
+      <TooltipHOC enabled={theme === 'image'} {...this.props}>
+        {container}
+      </TooltipHOC>
     );
   };
 
@@ -134,19 +102,17 @@ class AddItem extends Component {
       focusableOnFocus,
       focusableOnBlur,
     } = this.props;
-    const disable = disabled && theme !== 'image';
     return (
-      <div
-        {...style('root', { theme, disable }, this.props)}
+      <button
+        {...style('root', { theme }, this.props)}
         data-hook={dataHook}
-        onClick={disabled ? null : onClick}
+        disabled={disabled}
+        onClick={onClick}
         onFocus={focusableOnFocus}
         onBlur={focusableOnBlur}
-        {...focusableStates(this.props)}
-        tabIndex={disabled ? null : 0}
       >
-        {this.renderContent()}
-      </div>
+        {this._renderContent()}
+      </button>
     );
   }
 }

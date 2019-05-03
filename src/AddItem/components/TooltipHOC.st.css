@@ -1,0 +1,15 @@
+:import {
+  -st-from: "../../Tooltip/TooltipNext/Tooltip.st.css";
+  -st-default: Tooltip;
+}
+
+/** Tooltip overrides **/
+
+.tooltip {
+  -st-extends: Tooltip;
+}
+
+.tooltip::root {
+  width: 100%;
+  height: 100%;
+}

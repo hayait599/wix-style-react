@@ -85,7 +85,7 @@ const childrenExamples = [
   },
   {
     label: 'Component',
-    value: <Text>Add New Item</Text>,
+    value: <div>Add New Item</div>,
   },
 ];
 
@@ -98,7 +98,8 @@ export default {
   componentProps: {
     theme: 'dashes',
     dataHook: storySettings.dataHook,
-    children: childrenExamples[0].value,
+    children: 'Add Item',
+    tooltipContent: ' tooltip content',
     alignItems: 'center',
   },
 
