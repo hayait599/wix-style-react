@@ -373,30 +373,6 @@ class RichTextArea extends WixComponent {
     return (
       <div className={className} data-hook={dataHook}>
         <div
-          className={classNames(styles.toolbar, {
-            [styles.disabled]: disabled
-          })}
-          data-hook="toolbar"
-        >
-          <RichTextEditorToolbar
-            /*
-              activeToolbarButton prop required to trigger RichTextEditorToolbar re-render after toolbar button click
-            */
-            activeToolbarButton={this.state.activeToolbarButton}
-            selection={editorState.fragment.text}
-            disabled={disabled}
-            onClick={this.handleButtonClick}
-            onLinkButtonClick={this.handleLinkButtonClick}
-            onImageButtonClick={
-              onImageRequest ? this.handleImageButtonClick : null
-            }
-            hasMark={this.hasMark}
-            hasListBlock={this.hasListBlock}
-            hasLink={this.hasLink}
-            isSelectionExpanded={editorState.isExpanded}
-          />
-        </div>
-        <div
           className={classNames(styles.editorWrapper, {
             [styles.resizable]: resizable,
             [styles.scrollable]: isScrollable,
